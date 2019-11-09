@@ -1,0 +1,34 @@
+// Main styles file
+
+// Imports and layouts
+@import 'imports/imports'
+
+// Global styles
+\:root
+    +fluidType(400px, 1920px, 12px, 18px)
+
+a
+  cursor: pointer
+  color: black
+  display: block
+  text-decoration: none
+
+button
+  cursor: pointer
+
+*
+    &, &:before, &:after
+        box-sizing: border-box
+
+html, body, #__nuxt, #__layout
+  height: 100%
+
+.container
+  width: 100%
+  max-width: 1132px
+  margin: 0 auto
+  padding: 0 1rem
+  +media(1168px)
+    padding: 0
+
+@import 'layouts/layouts'

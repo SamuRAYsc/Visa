@@ -23,7 +23,11 @@ export default {
   ** Global CSS
   */
   css: [
+    '~assets/sass/styles.sass'
   ],
+  styleResources: {
+    sass: ['~assets/sass/imports/_imports.sass']
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -41,12 +45,33 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/style-resources',
+    '@nuxtjs/proxy',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true,
+  },
+  proxy: {
+    '/base/': {
+      target: process.env.NODE_ENV == 'production' ? 'http://api.visa.test' : 'http://api.visa.test',
+      pathRewrite: { '^/base/': '' }
+    },
+    '/wp/': {
+      target: process.env.NODE_ENV == 'production' ? 'http://api.visa.test/wp-json/' : 'http://api.visa.test/wp-json/',
+      pathRewrite: { '^/wp/': '/wp/v2/' }
+    },
+    '/menus/': {
+      target: process.env.NODE_ENV == 'production' ? 'http://api.visa.test/wp-json/' : 'http://api.visa.test/wp-json/',
+      pathRewrite: { '^/menus/': '/menus/v1/' }
+    },
+    '/acf/': {
+      target: process.env.NODE_ENV == 'production' ? 'http://api.visa.test/wp-json/' : 'http://api.visa.test/wp-json/',
+      pathRewrite: { '^/acf/': '/acf/v3/' }
+    },
   },
   /*
   ** Build configuration
@@ -55,7 +80,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }
