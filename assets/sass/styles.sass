@@ -1,27 +1,26 @@
-// Main styles file
-
-// Imports and layouts
 @import 'imports/imports'
 
-// Global styles
 \:root
-    +fluidType(400px, 1920px, 12px, 18px)
+  +fluidType(400px, 1920px, 12px, 18px)
+  color: var(--primary-color)
+
+
+html, body, #__nuxt, #__layout
+  height: 100%
 
 a
-  cursor: pointer
-  color: black
-  display: block
+  color: var(--primary-color)
   text-decoration: none
 
 button
   cursor: pointer
+  appearance: none
 
 *
-    &, &:before, &:after
-        box-sizing: border-box
-
-html, body, #__nuxt, #__layout
-  height: 100%
+  &, &:before, &:after
+    box-sizing: border-box
+  &:focus
+    outline: none
 
 .container
   width: 100%
@@ -31,4 +30,62 @@ html, body, #__nuxt, #__layout
   +media(1168px)
     padding: 0
 
-@import 'layouts/layouts'
+.button
+  +fluidType(400px, 1920px, 12px, 14px)
+  --button-primary-color: var(--primary-color)
+  --button-border-color: var(--primary-color)
+  --button-background-color: transparent
+  --button-font: var(--primary-font)
+  font-family: var(--button-font)
+  border-radius: 7px
+  color: var(--button-primary-color)
+  border: 2px solid var(--button-border-color)
+  background-color: var(--button-background-color)
+  letter-spacing: 0.63px
+  padding: 1.27rem 0
+  position: relative
+  &::after
+    +transition(all, .15s)
+    display: block
+    position: absolute
+    content: ''
+    top: -2px
+    right: -2px
+    bottom: -2px
+    left: -2px
+    border: 2px solid var(--button-border-color)
+    border-radius: 7px
+  &:hover, &:focus
+    &::after
+      border-radius: 11px
+      top: -7px
+      right: -7px
+      bottom: -7px
+      left: -7px
+  &--light-border
+    --button-border-color: var(--secondary-color)
+  &--light-text
+    --button-primary-color: var(--secondary-color)
+  &--accent-border
+    --button-border-color: var(--accent-color)
+  &--accent-bg
+    --button-background-color: var(--accent-color)
+
+.link
+  position: relative
+  &::after
+    +transition(transform)
+    position: absolute
+    content: ''
+    display: block
+    height: 2px
+    background-color: var(--accent-color)
+    top: calc(100% + 2px)
+    right: 0
+    left: 0
+    transform: scaleX(0)
+    transform-origin: right
+  &:hover, &:focus
+    &::after
+      transform-origin: left
+      transform: scaleX(1)
